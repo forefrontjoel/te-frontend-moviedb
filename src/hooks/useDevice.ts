@@ -4,12 +4,12 @@ type DeviceType = "mobile" | "desktop";
 
 export const useDevice = (): DeviceType => {
   const [device, setDevice] = useState<DeviceType>(() => {
-    return window.innerWidth <= 480 ? "mobile" : "desktop";
+    return window.innerWidth <= 768 ? "mobile" : "desktop";
   });
 
   useEffect(() => {
     const handleResize = () => {
-      const newDevice = window.innerWidth <= 480 ? "mobile" : "desktop";
+      const newDevice = window.innerWidth <= 768 ? "mobile" : "desktop";
       if (newDevice !== device) {
         setDevice(newDevice);
       }

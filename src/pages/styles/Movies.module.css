@@ -53,7 +53,7 @@
 }
 
 /* Mobile screens */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .moviesContainer {
     padding: 10px;
     width: 100%;
