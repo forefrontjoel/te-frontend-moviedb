@@ -1,0 +1,66 @@
+.moviesContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.resultsCount {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.searchSection {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.moviesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.noResults {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .moviesContainer {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+}
