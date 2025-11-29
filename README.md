@@ -8,6 +8,7 @@ Before you start, please read these guidelines:
 
 - **🎓 Learn by Doing**: This project is designed for hands-on learning. Please avoid using AI agent mode or excessive AI assistance. Anyone can code with AI, everyone does not understand its output.
 - **📦 No Additional Packages**: Work with the existing dependencies only. Do not install new npm packages. Everything you need is already included in the project.
+- **😌 Keep it simple **: Don't care too much about making it perfect. Understand the basics and move on.
 
 ## 🚀 Getting Started
 
@@ -43,29 +44,6 @@ npm start
 http://localhost:3000
 ```
 
-## 📁 Project Structure
-
-```
-src/
-├── components/          # Reusable UI components
-│   ├── Button.tsx
-│   └── styles/
-│       └── Button.module.css
-├── pages/              # Page components
-│   ├── Home.tsx
-│   ├── Movies.tsx
-│   └── styles/
-│       ├── Home.module.css
-│       └── Movies.module.css
-├── data/               # Mock data
-│   └── movies.ts
-├── styles/             # Global styles
-│   └── App.module.css
-├── App.tsx             # Main app with routing
-├── main.tsx            # Entry point
-└── index.css           # Global CSS
-```
-
 ## 🛠️ Available Scripts
 
 - `npm start` - Start development server on localhost:3000
@@ -85,6 +63,8 @@ Add the ability to save movies to a watchlist:
 - Create a sidebar component that displays watchlist movies
 - Store watchlist in component state (useState)
 - Display the sidebar next to the movie grid
+
+Tips: If you have a hard time handling the sizing of the watchlist and the movies, look up flex-grow, flex-shrink and flex-basis. Check the implementation in MovieCard.module.css.
 
 ### 📱 Task 2: Make Watchlist Mobile Responsive
 
@@ -229,8 +209,6 @@ Make the watchlist persist across page refreshes:
 
 - Save watchlist to browser's localStorage
 - Load watchlist from localStorage on app mount
-- Create custom hooks (useLocalStorage)
-- Handle edge cases (empty storage, invalid data)
 
 #### 🔍 Add Filter and Sort Features
 

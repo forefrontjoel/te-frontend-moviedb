@@ -1,6 +1,8 @@
 .movieCard {
-  flex: 1 1 300px;
-  max-width: 300px;
+  /* flex: 1 1 300px;  Flex properties for responsiveness. This is a shorthand for the flex-grow, flex-shrink, and flex-basis properties */
+  flex-grow: 1; /* Allow the card to grow */
+  flex-shrink: 1; /* Allow the card to shrink */
+  flex-basis: 300px; /* Set the initial size of the card */
   background: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
