@@ -21,21 +21,7 @@ export const Movies: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-
-    // Auto-filter as user types
-    if (value === "") {
-      setFilteredMovies(movies);
-    } else {
-      const filtered = movies.filter(
-        (movie) =>
-          movie.title.toLowerCase().includes(value.toLowerCase()) ||
-          movie.director.toLowerCase().includes(value.toLowerCase()) ||
-          movie.genre.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredMovies(filtered);
-    }
+    setSearchTerm(e.target.value);
   };
 
   return (
