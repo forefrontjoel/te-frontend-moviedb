@@ -20,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="movies" element={<Movies />} />
+            {/* Add a Movie details page: <Route path="movies/:id" element={<MovieDetails />} /> */}
           </Routes>
         </main>
       </div>

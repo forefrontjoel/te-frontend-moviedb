@@ -1,27 +1,29 @@
 import React, { useState } from "react";
-import { movies, Movie } from "../data/movies";
+import { Movie } from "../data/movies";
 import { Button } from "../components/Button";
 import { MovieCard } from "../components/MovieCard";
 import styles from "./styles/Movies.module.css";
 import { useDevice } from "../hooks/useDevice";
+import { searchMovies } from "../api/omdb/movieApi";
 
 export const Movies: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredMovies, setFilteredMovies] = useState<Movie[]>(movies);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
+
   const [showMobileWatchList, setShowMobileWatchList] =
     useState<boolean>(false);
 
   const [watchList, setWatchList] = useState<Movie[]>([]);
   const device = useDevice();
 
-  const handleSearch = () => {
-    const filtered = movies.filter(
-      (movie) =>
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.director.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        movie.genre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredMovies(filtered);
+  const handleSearch = async () => {
+    try {
+      const movies = await searchMovies(searchTerm);
+      setFilteredMovies(movies);
+    } catch (err) {
+      alert("Failed to fetch movies");
+      setFilteredMovies([]);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +53,7 @@ export const Movies: React.FC = () => {
       <div className={styles.searchSection}>
         <input
           type="text"
-          placeholder="Search by title, director, or genre..."
+          placeholder="Search movies (e.g., 'batman', 'matrix')..."
           value={searchTerm}
           onChange={handleInputChange}
           className={styles.searchInput}
@@ -63,6 +65,7 @@ export const Movies: React.FC = () => {
           {showMobileWatchList ? "Show Movies" : "Show Watchlist"}
         </Button>
       )}
+
       <div className={styles.moviesSection}>
         {device === "desktop" && (
           <>

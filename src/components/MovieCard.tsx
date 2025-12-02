@@ -18,15 +18,6 @@ export const MovieCard: React.FC<MovieCardProps> = ({
       <p>
         <strong>Year:</strong> {movie.year}
       </p>
-      <p>
-        <strong>Genre:</strong> {movie.genre}
-      </p>
-      <p>
-        <strong>Director:</strong> {movie.director}
-      </p>
-      <p>
-        <strong>Rating:</strong> {movie.rating}/10
-      </p>
       <Button onClick={() => addToWatchList(movie)}>Add to watchlist</Button>
     </div>
   );
