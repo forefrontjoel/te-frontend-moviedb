@@ -8,6 +8,10 @@ import { useDevice } from "../hooks/useDevice";
 export const Movies: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>(movies);
+  const [showMobileWatchList, setShowMobileWatchList] =
+    useState<boolean>(false);
+
+  const [watchList, setWatchList] = useState<Movie[]>([]);
   const device = useDevice();
 
   const handleSearch = () => {
@@ -22,6 +26,16 @@ export const Movies: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+  };
+
+  const addToWatchList = (movie: Movie) => {
+    if (!watchList.find((m) => m.id === movie.id)) {
+      setWatchList([...watchList, movie]);
+    }
+  };
+
+  const clearWatchList = () => {
+    setWatchList([]);
   };
 
   return (
@@ -44,10 +58,71 @@ export const Movies: React.FC = () => {
         />
         <Button onClick={handleSearch}>Search</Button>
       </div>
-      <div className={styles.moviesList}>
-        {filteredMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
+      {device === "mobile" && (
+        <Button onClick={() => setShowMobileWatchList(!showMobileWatchList)}>
+          {showMobileWatchList ? "Show Movies" : "Show Watchlist"}
+        </Button>
+      )}
+      <div className={styles.moviesSection}>
+        {device === "desktop" && (
+          <>
+            <div className={styles.moviesList}>
+              {filteredMovies.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  addToWatchList={addToWatchList}
+                />
+              ))}
+            </div>
+            <div className={styles.sideBar}>
+              <h2>Your Watchlist</h2>
+              {watchList.length === 0 ? (
+                <p>No movies in your watchlist.</p>
+              ) : (
+                <>
+                  {watchList.map((movie) => (
+                    <div key={movie.id} className={styles.watchListItem}>
+                      {movie.title} ({movie.year})
+                    </div>
+                  ))}
+                  <Button onClick={clearWatchList}>Clear Watchlist</Button>
+                </>
+              )}
+            </div>
+          </>
+        )}
+        {device === "mobile" && (
+          <>
+            {showMobileWatchList ? (
+              <div className={styles.sideBar}>
+                <h2>Your Watchlist</h2>
+                {watchList.length === 0 ? (
+                  <p>No movies in your watchlist.</p>
+                ) : (
+                  <>
+                    {watchList.map((movie) => (
+                      <div key={movie.id} className={styles.watchListItem}>
+                        {movie.title} ({movie.year})
+                      </div>
+                    ))}
+                    <Button onClick={clearWatchList}>Clear Watchlist</Button>
+                  </>
+                )}
+              </div>
+            ) : (
+              <div className={styles.moviesList}>
+                {filteredMovies.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    addToWatchList={addToWatchList}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

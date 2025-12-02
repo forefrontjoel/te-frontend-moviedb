@@ -66,3 +66,14 @@
   }
 
 }
+
+
+.moviesSection {
+  display: flex;
+  flex-direction: row;
+}
+
+.sideBar {
+  flex: 0 0 250px;
+  margin-left: 20px;
+}
